@@ -1,6 +1,18 @@
 <UiTable as |Table|>
   <Table.head as |Thead|>
-    <Thead.th />
+    <Thead.th>
+      <label data-test-id="checkbox-label" class="flex items-center leading-loose" ...attributes>
+        <Input
+          data-test-id="checkbox"
+          @type="checkbox"
+          class="mr-2"
+          indeterminate={{this.indeterminate}}
+          @checked={{false}}
+          {{on "click" this.selectTwo}}
+        />
+        Selected 2
+      </label>
+    </Thead.th>
     <Thead.th>Name</Thead.th>
     <Thead.th>Device</Thead.th>
     <Thead.th>Path</Thead.th>
@@ -9,11 +21,31 @@
   <Table.body as |Tbody|>
     {{#each this.model as |download|}}
       <Tbody.tr as |Row|>
-        <Row.td>checkbox</Row.td>
+        <Row.td>
+          <Input
+            data-test-id="checkbox"
+            @type="checkbox"
+            class="mr-2"
+            indeterminate={{false}}
+            disabled={{(not-eq download.status "available")}}
+            @checked={{false}}
+            {{on "click" this.select}}
+          />
+        </Row.td>
         <Row.td>{{download.name}}</Row.td>
-        <Row.td>{{download.device}}</Row.td>
+        <Row.td class="capitalize">{{download.device}}</Row.td>
         <Row.td>{{download.path}}</Row.td>
-        <Row.td>{{download.status}}</Row.td>
+        {{#if (eq download.status "available")}}
+          <Row.td class="flex capitalize"><svg
+              class="w-3 mr-1"
+              viewBox="0 0 100 100"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle fill="#7FD235" cx="50" cy="50" r="50" stroke="currentcolor"></circle>
+            </svg><span>{{download.status}}</span></Row.td>
+        {{else}}
+          <Row.td class="capitalize">{{download.status}}</Row.td>
+        {{/if}}
       </Tbody.tr>
     {{else}}
       <Tbody.empty>
