@@ -1,3 +1,7 @@
-<h1>Hello Table</h1>
-
-{{yield}}
+<table data-test-id="table" class="relative table-auto w-full" ...attributes>
+  {{yield
+    (hash
+      head=(component "ui-table/thead") body=(component "ui-table/tbody")
+    )
+  }}
+</table>

@@ -1,1 +1,24 @@
-<UiTable></UiTable>
+<UiTable as |Table|>
+  <Table.head as |Thead|>
+    <Thead.th />
+    <Thead.th>Name</Thead.th>
+    <Thead.th>Device</Thead.th>
+    <Thead.th>Path</Thead.th>
+    <Thead.th>Status</Thead.th>
+  </Table.head>
+  <Table.body as |Tbody|>
+    {{#each this.model as |download|}}
+      <Tbody.tr as |Row|>
+        <Row.td>checkbox</Row.td>
+        <Row.td>{{download.name}}</Row.td>
+        <Row.td>{{download.device}}</Row.td>
+        <Row.td>{{download.path}}</Row.td>
+        <Row.td>{{download.status}}</Row.td>
+      </Tbody.tr>
+    {{else}}
+      <Tbody.empty>
+        There are no downloads available.
+      </Tbody.empty>
+    {{/each}}
+  </Table.body>
+</UiTable>
