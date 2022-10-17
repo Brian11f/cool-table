@@ -1,18 +1,20 @@
+<article class="flex flex-row my-2">
+  <label data-test-id="checkbox-label" class="items-center leading-loose mx-2" ...attributes>
+    <Input
+      data-test-id="checkbox"
+      @type="checkbox"
+      class="mr-2"
+      indeterminate={{this.indeterminateState}}
+      @checked={{this.allIdAreChecked}}
+      {{on "change" this.selectAll}}
+    />
+    Selected 2
+  </label>
+  <UiButton class="ml-5" @onClick={{this.startDownload}} @type="button">Download Selected</UiButton>
+</article>
 <UiTable as |Table|>
   <Table.head as |Thead|>
-    <Thead.th>
-      <label data-test-id="checkbox-label" class="flex items-center leading-loose" ...attributes>
-        <Input
-          data-test-id="checkbox"
-          @type="checkbox"
-          class="mr-2"
-          indeterminate={{this.indeterminate}}
-          @checked={{false}}
-          {{on "click" this.selectTwo}}
-        />
-        Selected 2
-      </label>
-    </Thead.th>
+    <Thead.th />
     <Thead.th>Name</Thead.th>
     <Thead.th>Device</Thead.th>
     <Thead.th>Path</Thead.th>
@@ -22,14 +24,12 @@
     {{#each this.model as |download|}}
       <Tbody.tr as |Row|>
         <Row.td>
-          <Input
+          <UiCheckbox
             data-test-id="checkbox"
-            @type="checkbox"
-            class="mr-2"
-            indeterminate={{false}}
-            disabled={{(not-eq download.status "available")}}
-            @checked={{false}}
-            {{on "click" this.select}}
+            @onClick={{(fn this.select download)}}
+            @disabled={{(not-eq download.status "available")}}
+            @model={{download}}
+            @selected={{this.selectedDownloads}}
           />
         </Row.td>
         <Row.td>{{download.name}}</Row.td>

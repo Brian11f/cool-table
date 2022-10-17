@@ -1,0 +1,9 @@
+<Input
+  data-test-id="checkbox"
+  @type="checkbox"
+  class="mr-2"
+  indeterminate={{false}}
+  disabled={{@disabled}}
+  @checked={{this.isChecked}}
+  {{on "click" @onClick}}
+/>
