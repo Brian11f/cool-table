@@ -1,7 +1,6 @@
 # cool-table
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This is a cool table for downloading your favorite game of thrones trivia.
 
 ## Prerequisites
 
